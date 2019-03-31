@@ -1,0 +1,9 @@
+mode: ContinuousDelivery
+branches:
+  master:
+    increment: none
+  develop:
+    tag: 'beta'
+    increment: 'Patch'
+ignore:
+  sha: []

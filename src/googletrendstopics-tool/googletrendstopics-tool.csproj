@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <PackAsTool>true</PackAsTool>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CodeHollow.FeedReader" Version="1.1.6" />
+    <PackageReference Include="ConsoleTableExt" Version="2.0.2" />
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.3.2" />
+    <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
+  </ItemGroup>
+  <PropertyGroup>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+</Project>
