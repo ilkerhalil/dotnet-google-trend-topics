@@ -1,0 +1,10 @@
+resources:
+  containers:
+  - container: trusty
+    image: iturer/docker-dotnetcore-cake-build
+
+jobs:
+- job: build
+  container: trusty
+  steps:
+  - script: dotnet-cake --target=build
