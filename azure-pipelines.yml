@@ -7,4 +7,4 @@ jobs:
 - job: build
   container: trusty
   steps:
-  - script: ~/.dotnet/tools/dotnet-cake --target=build
+  - bash: ~/.dotnet/tools/dotnet-cake --target=build
