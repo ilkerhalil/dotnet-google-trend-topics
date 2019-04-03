@@ -1,10 +1,8 @@
-resources:
-  containers:
-  - container: trusty
-    image: iturer/docker-dotnetcore-cake-build
+pool:
+  vmImage: 'ubuntu-16.04'
 
-jobs:
-- job: build
-  container: trusty
-  steps:
-  - bash: ~/.dotnet/tools/dotnet-cake --target=build
+container: iturer/docker-dotnetcore-cake-build
+
+steps:
+- script: ~/.dotnet/tools/dotnet-cake --target=build
+
