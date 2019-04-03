@@ -1,7 +1,8 @@
 pool:
   vmImage: 'ubuntu-16.04'
 
-container: iturer/docker-dotnetcore-cake-build
+container:
+  image: iturer/docker-dotnetcore-cake-build
 
 steps:
 - script: ~/.dotnet/tools/dotnet-cake --target=build
