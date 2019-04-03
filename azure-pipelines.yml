@@ -6,6 +6,6 @@ container:
 
 steps:
 - script: dotnet-cake --target=build
-  workingDirectory: /home/.dotnet/tools/
+  workingDirectory: $HOME/.dotnet/tools
 
 
