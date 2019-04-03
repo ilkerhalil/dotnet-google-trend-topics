@@ -5,5 +5,5 @@ container:
   image: iturer/docker-dotnetcore-cake-build
 
 steps:
-- script: ~/.dotnet/tools/dotnet-cake --target=build
+- script: ./build.sh --script="build.cake" --target="Build"
 
