@@ -2,7 +2,7 @@ pool:
   vmImage: 'ubuntu-16.04'
 
 container:
-  image: iturer/jenkins-slave-dotnetcore
+  image: iturer/docker-dotnetcore-cake-build
 
 steps:
 - script: ./build.sh --script="build.cake" --target="Build"
