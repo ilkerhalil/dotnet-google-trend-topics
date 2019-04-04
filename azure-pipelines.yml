@@ -2,7 +2,7 @@ pool:
   vmImage: 'ubuntu-16.04'
 
 container:
-  image: iturer/docker-dotnetcore-cake-build
+  image: cakebuild/cake:2.1-sdk-mono
 
 steps:
 - script: ./build.sh --script="build.cake" --target="Build"
