@@ -13,25 +13,26 @@ using System.Linq;
 using ConsoleTableExt;
 
 namespace googledtrendstopics_tool {
-    public class TopicTrendFeedReader {
-        string url = string.Empty;
+    public class TopicTrendFeedReader : BaseTopicTrendFeedReader
+    {
+        private readonly string _url = string.Empty;
+        private const string baseUrl = "https://trends.google.com/trends/trendingsearches/";
+
         public TopicTrendFeedReader () {
             Geo = "US";
             Period = Period.Daily;
-            url = $"https://trends.google.com/trends/trendingsearches/{Enum.GetName(Period.GetType(),Period).ToLower()}/rss?geo={Geo}";
+            _url = $"{baseUrl}{Enum.GetName(Period.GetType(),Period).ToLower()}/rss?geo={Geo}";
 
         }
 
-        public string FeedUrl { get; set; }
-
         [Option (ShortName = "g", Description = "Trends geo,Default value US")]
-
         public string Geo { get; set; }
 
         [Option (ShortName = "p", Description = "Trends period,Default value Daily")]
         public Period Period { get; set; }
 
-        public async Task<int> OnExecute (CommandLineApplication app, IConsole console)
+        /// <inheritdoc />
+        public override async Task<int> OnExecute (CommandLineApplication app, IConsole console)
         {
             Console.WriteLine ($"{Enum.GetName(Period.GetType(),Period)} - {Geo} Google Topic Trends");
             var result = await CreateFeedResult();
@@ -39,39 +40,42 @@ namespace googledtrendstopics_tool {
                                .WithFormat(ConsoleTableBuilderFormat.Alternative)
                                .ExportAndWriteLine();
             return await Task.FromResult(Program.OK);
-
         }
 
-        private async Task<List<FeedResult>> CreateFeedResult()
+        protected override async Task<List<FeedResult>> CreateFeedResult()
         {
-            using (var xmlReader = XmlReader.Create(url, new XmlReaderSettings() { Async = true }))
+            using (var xmlReader = XmlReader.Create(_url, new XmlReaderSettings() { Async = true }))
             {
-                List<FeedResult> feedResults = new List<FeedResult>();
+                var feedResults = new List<FeedResult>();
                 var reader = new RssFeedReader(xmlReader);
 
                 while (await reader.Read())
                 {
                     switch (reader.ElementType)
                     {
-
                         case SyndicationElementType.Item:
                             var item = await reader.ReadItem();
                             feedResults.Add(new FeedResult(){Title = item.Title,Description = item.Description});
-
-                            //Console.WriteLine (item.Title);
-
                             break;
+                        case SyndicationElementType.None:
+                            break;
+                        case SyndicationElementType.Person:
+                            break;
+                        case SyndicationElementType.Link:
+                            break;
+                        case SyndicationElementType.Content:
+                            break;
+                        case SyndicationElementType.Category:
+                            break;
+                        case SyndicationElementType.Image:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
                 }
                 
                 return await Task.FromResult(feedResults);
             }
         }
-    }
-    public class FeedResult {
-
-        public string Title { get; set; }
-
-        public string Description { get; set; }
     }
 }

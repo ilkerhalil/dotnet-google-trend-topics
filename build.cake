@@ -92,11 +92,9 @@ Task ("Pack")
 				OutputDirectory = artifactDir,ArgumentCustomization = (args) => {
                   args.Append("/p:Version={0}", versionInfo);
                   return args;
-
                }
 		};
 		DotNetCorePack (projectPath, settings);
-
 
 	});
 
