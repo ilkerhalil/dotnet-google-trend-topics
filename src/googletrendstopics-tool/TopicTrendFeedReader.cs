@@ -1,42 +1,38 @@
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 using googletrendstopics_tool;
 using McMaster.Extensions.CommandLineUtils;
 using Microsoft.SyndicationFeed;
-using Microsoft.SyndicationFeed.Atom;
 using Microsoft.SyndicationFeed.Rss;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using ConsoleTableExt;
 
 namespace googledtrendstopics_tool {
     public class TopicTrendFeedReader : BaseTopicTrendFeedReader
     {
-        private readonly string _url = string.Empty;
-        private const string baseUrl = "https://trends.google.com/trends/trendingsearches/";
+        private string _url = string.Empty;
+        private const string baseUrl = "https://trends.google.com/trends/trendingsearches/daily";
 
         public TopicTrendFeedReader () {
             Geo = "US";
-            Period = Period.Daily;
-            _url = $"{baseUrl}{Enum.GetName(Period.GetType(),Period).ToLower()}/rss?geo={Geo}";
+            
+            
 
         }
 
         [Option (ShortName = "g", Description = "Trends geo,Default value US")]
-        public string Geo { get; set; }
+        public  string Geo { get; set; }
 
-        [Option (ShortName = "p", Description = "Trends period,Default value Daily")]
-        public Period Period { get; set; }
+
 
         /// <inheritdoc />
         public override async Task<int> OnExecute (CommandLineApplication app, IConsole console)
         {
-            Console.WriteLine ($"{Enum.GetName(Period.GetType(),Period)} - {Geo} Google Topic Trends");
+            Console.WriteLine ($"{Geo} Google Topic Trends");
             var result = await CreateFeedResult();
             ConsoleTableBuilder.From(result)
+                
                                .WithFormat(ConsoleTableBuilderFormat.Alternative)
                                .ExportAndWriteLine();
             return await Task.FromResult(Program.OK);
@@ -44,6 +40,7 @@ namespace googledtrendstopics_tool {
 
         protected override async Task<List<FeedResult>> CreateFeedResult()
         {
+            _url = $"{baseUrl}/rss?geo={Geo}";
             using (var xmlReader = XmlReader.Create(_url, new XmlReaderSettings() { Async = true }))
             {
                 var feedResults = new List<FeedResult>();
@@ -55,7 +52,7 @@ namespace googledtrendstopics_tool {
                     {
                         case SyndicationElementType.Item:
                             var item = await reader.ReadItem();
-                            feedResults.Add(new FeedResult(){Title = item.Title,Description = item.Description});
+                            feedResults.Add(new FeedResult(){Trend = item.Title,Description = item.Description});
                             break;
                         case SyndicationElementType.None:
                             break;

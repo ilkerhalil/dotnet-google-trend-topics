@@ -98,6 +98,19 @@ Task ("Pack")
 
 	});
 
+Task("Push")
+.Does(()=>{
+	
+	 var settings = new DotNetCoreNuGetPushSettings
+     {
+         Source = "https://api.nuget.org/v3/index.json",
+         ApiKey = EnvironmentVariable("nugetKey"),
+		 
+     };
+
+     DotNetCoreNuGetPush("./artifacts/googletrendstopics-tool.nupkg", settings);
+});
+
 
 
 Task ("Default")

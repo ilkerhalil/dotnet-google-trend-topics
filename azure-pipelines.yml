@@ -6,5 +6,10 @@ container:
 
 steps:
 - script: ./build.sh --script="build.cake" --target="Build"
+- script: ./build.sh --script="build.cake" --target="Pack"
+
+
+
+
 
 
