@@ -11,16 +11,6 @@ string versionInfo = null;
 
 Information (Figlet ("dotnet-google-trend-topics"));
 
-Task("Version")
-	.Does(() =>
-{
-	
-		StartProcess("/bin/bash","-c \"~/.dotnet/tools/dotnet-gitversion  | jq -r .NuGetVersionV2 >version.md\"");
-		versionInfo=System.IO.File.ReadAllText("version.md");
-		Information($"version => {versionInfo}");
-	
-
-});
 
 Task ("Clean")
 	.Does (() => {
@@ -79,7 +69,6 @@ Task ("Build")
 	});
 
 Task ("Pack")
-.IsDependentOn("Version")
 	.Does (() => {
 		var projectPath = "./src/googletrendstopics-tool/googletrendstopics-tool.csproj";
 		var settings = new DotNetCorePackSettings {
@@ -87,7 +76,7 @@ Task ("Pack")
 			OutputDirectory = artifactDir,
 			NoBuild =true,
 			ArgumentCustomization = args => {
-				args.Append("/p:Version=" + versionInfo);
+				
 				
 				return args;
 			}
@@ -96,7 +85,7 @@ Task ("Pack")
 	});
 
 Task("Push")
-.IsDependentOn("Version")
+
 .Does(()=>{
 	var apiKey=	EnvironmentVariable("nugetKey");
 	 var settings = new DotNetCoreNuGetPushSettings
@@ -104,8 +93,10 @@ Task("Push")
          Source = "https://www.myget.org/F/ilkerhalil/api/v3/index.json",
          ApiKey =apiKey,
      };
-	 var nupkgFile =$"./artifacts/Google.TrendTopic.Dotnet.Cli.{versionInfo}.nupkg";
-     DotNetCoreNuGetPush(nupkgFile, settings);
+	 
+	 var path=  GetFiles ("./artifacts/Google.TrendTopic.Dotnet.Cli.*.nupkg").First ();
+	
+     DotNetCoreNuGetPush(path.FullPath, settings);
 });
 
 FilePathCollection GetSrcProjectFiles () {
