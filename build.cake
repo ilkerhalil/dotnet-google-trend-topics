@@ -17,6 +17,8 @@ Task("Version")
 
 	StartProcess("/bin/bash","-c \"dotnet gitversion | jq -r .NuGetVersionV2 >version.md\"");
 	versionInfo=System.IO.File.ReadAllText("version.md");
+	Information(versionInfo);
+
 });
 
 Task ("Clean")
