@@ -14,22 +14,11 @@ Information (Figlet ("dotnet-google-trend-topics"));
 Task("Version")
 	.Does(() =>
 {
-	if(BuildSystem.IsRunningOnAzurePipelines)
-	{
-		StartProcess("/bin/bash","-c \"dotnet gitversion /output buildserver\"");
-		if(System.IO.File.Exists("gitversion.properties"))
-		{
-			var result = System.IO.File.ReadAllText("gitversion.properties");
-			Information(result);
-		}
-		Information($"version => {versionInfo}");	
-	}
-	else
-	{
-		StartProcess("/bin/bash","-c \"dotnet gitversion | jq -r .NuGetVersionV2 >version.md\"");
+	
+		StartProcess("/bin/bash","-c \"/usr/local/bin/dotnet gitversion  | jq -r .NuGetVersionV2 >version.md\"");
 		versionInfo=System.IO.File.ReadAllText("version.md");
 		Information($"version => {versionInfo}");
-	}
+	
 
 });
 
