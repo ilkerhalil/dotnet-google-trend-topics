@@ -82,9 +82,10 @@ Task ("Pack")
 		var settings = new DotNetCorePackSettings {
 			Configuration = "Release",
 			OutputDirectory = artifactDir,
+			NoBuild =true,
 			ArgumentCustomization = args => {
 				args.Append("/p:Version=" + versionInfo);
-				args.Append("/p:NuGetVersion="+ versionInfo);
+				
 				return args;
 			}
 		};
