@@ -16,7 +16,7 @@ Task("Version")
 {
 	versionInfo = GitVersion(new GitVersionSettings
 	{
-		 OutputType = GitVersionOutput.BuildServer 
+		 OutputType = GitVersionOutput.Json 
 	}).NuGetVersionV2;
 	Information(versionInfo);
 });
