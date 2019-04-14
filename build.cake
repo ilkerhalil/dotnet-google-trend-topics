@@ -15,7 +15,7 @@ Task("Version")
 	.Does(() =>
 {
 	
-		StartProcess("/bin/bash","-c \"/usr/local/bin/dotnet gitversion  | jq -r .NuGetVersionV2 >version.md\"");
+		StartProcess("/bin/bash","-c \"/usr/bin/dotnet gitversion  | jq -r .NuGetVersionV2 >version.md\"");
 		versionInfo=System.IO.File.ReadAllText("version.md");
 		Information($"version => {versionInfo}");
 	
