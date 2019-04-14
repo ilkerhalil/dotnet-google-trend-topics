@@ -14,11 +14,9 @@ Information (Figlet ("dotnet-google-trend-topics"));
 Task("Version")
 	.Does(() =>
 {
-	versionInfo = GitVersion(new GitVersionSettings
-	{
-		 OutputType = GitVersionOutput.Json 
-	}).NuGetVersionV2;
-	Information(versionInfo);
+
+	StartProcess("/bin/bash","-c \"dotnet gitversion | jq -r .NuGetVersionV2 >version.md\"");
+	versionInfo=System.IO.File.ReadAllText("version.md");
 });
 
 Task ("Clean")
