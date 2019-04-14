@@ -14,7 +14,10 @@ Information (Figlet ("dotnet-google-trend-topics"));
 Task("Version")
 	.Does(() =>
 {
-	versionInfo = GitVersion(new GitVersionSettings{ OutputType = GitVersionOutput.Json }).NuGetVersionV2;
+	versionInfo = GitVersion(new GitVersionSettings
+	{
+		 OutputType = GitVersionOutput.BuildServer 
+	}).NuGetVersionV2;
 	Information(versionInfo);
 });
 
