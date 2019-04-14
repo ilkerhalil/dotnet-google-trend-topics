@@ -82,11 +82,13 @@ Task ("Pack")
 		var settings = new DotNetCorePackSettings {
 			Configuration = "Release",
 			OutputDirectory = artifactDir,
-			
-			ArgumentCustomization = args => args.Append("/p:Version=" + versionInfo)
-
+			ArgumentCustomization = args => {
+				args.Append("/p:Version=" + versionInfo);
+				args.Append("/p:NuGetVersion="+ versionInfo);
+				return args;
+			}
 		};
-		DotNetCorePack("./src/googletrendstopics-tool/googletrendstopics-tool.csproj", settings);
+		DotNetCorePack(projectPath, settings);
 	});
 
 Task("Push")

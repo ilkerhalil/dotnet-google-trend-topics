@@ -7,7 +7,7 @@
     <PackageId>Google.TrendTopic.Dotnet.Cli</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CodeHollow.FeedReader" Version="1.1.6" />
+    
     <PackageReference Include="ConsoleTableExt" Version="2.0.2" />
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.3.2" />
     <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
