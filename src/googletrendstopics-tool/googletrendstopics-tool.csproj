@@ -7,7 +7,7 @@
     <PackageId>Google.TrendTopic.Dotnet.Cli</PackageId>
     <LangVersion>latest</LangVersion>
     <Version>$(Version)</Version>
-    <MinVerMinimumMajorMinor>4.0</MinVerMinimumMajorMinor>
+    <MinVerMinimumMajorMinor>1.2</MinVerMinimumMajorMinor>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="ConsoleTableExt" Version="2.0.2" />
