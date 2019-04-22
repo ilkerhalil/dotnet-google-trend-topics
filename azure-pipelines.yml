@@ -1,0 +1,16 @@
+pool:
+  vmImage: 'ubuntu-16.04'
+
+container:
+  image: iturer/docker-dotnetcore-cake-build
+
+steps:
+- script: ./build.sh --script="build.cake" --target="Build" --verbosity="verbose"
+- script: ./build.sh --script="build.cake" --target="Pack"  --verbosity="verbose"
+- script: ./build.sh --script="build.cake" --target="Push"  --verbosity="verbose"
+
+
+
+
+
+
