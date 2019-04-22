@@ -5,15 +5,13 @@
     <IsPackable>true</IsPackable>
     <PackAsTool>true</PackAsTool>
     <PackageId>Google.TrendTopic.Dotnet.Cli</PackageId>
+    <LangVersion>latest</LangVersion>
+    <Version>$(Version)</Version>
+    <MinVerMinimumMajorMinor>4.0</MinVerMinimumMajorMinor>
   </PropertyGroup>
   <ItemGroup>
-    
     <PackageReference Include="ConsoleTableExt" Version="2.0.2" />
-    
-    <PackageReference Include="GitVersionTask" Version="5.0.0-beta2-64">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="MinVer" Version="1.1.0-beta.2" PrivateAssets="all" />
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.3.2" />
     <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
   </ItemGroup>
