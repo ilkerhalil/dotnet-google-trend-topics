@@ -3,13 +3,13 @@ pool:
 
 container:
   image: iturer/docker-dotnetcore-cake-build
-  env: nugetKey:$(nugetKey)
 
 steps:
-- script: echo $nugetKey
 - script: ./build.sh --script="build.cake" --target="Build" --verbosity="verbose"
 - script: ./build.sh --script="build.cake" --target="Pack"  --verbosity="verbose"
 - script: ./build.sh --script="build.cake" --target="Push"  --verbosity="verbose"
+  env:
+    nugetKey: $(nugetKey)
 
 
 
