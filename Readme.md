@@ -24,7 +24,7 @@ Build status
 
 dotnet-google-trend-topics is built against the latest DotNet Core 2.2.
 
--   [Install](https://www.microsoft.com/net/download/core#/current)  the latest .NET Core 2.2 SDK
+-   [Install](https://www.microsoft.com/net/download/core#/current)  the latest .NET Core 3.1 SDK
 -   Run  `./build.ps1 -Target Build`  or  `./build.sh --target=Build  in the root of the repo
 
 ## Acknowledgements

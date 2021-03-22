@@ -1,4 +1,4 @@
-namespace googledtrendstopics_tool
+namespace GoogleTrendsTopicsTool
 {
     public class FeedResult {
 

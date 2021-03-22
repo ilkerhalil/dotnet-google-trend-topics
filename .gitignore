@@ -346,3 +346,5 @@ MigrationBackup/
 .vscode/
 
 .idea/
+coverlet/
+coverage.json

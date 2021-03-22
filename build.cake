@@ -1,7 +1,9 @@
 #addin nuget:?package=Cake.Figlet&version=1.1.0
 #tool "nuget:?package=GitVersion.CommandLine&version=5.0.0-beta2-61"
+#addin "nuget:?package=Cake.Coverlet&version=2.5.4"
 
 var target = Argument ("target", "Default");
+var configuration = Argument ("configuration", "Release");
 var solutionDir = System.IO.Directory.GetCurrentDirectory ();
 var testResultDir = Argument ("testResultDir", System.IO.Path.Combine (solutionDir, "test-results")); // ./build.sh --target Build-Container -testResultsDir="somedir"
 var artifactDir = Argument ("artifactDir", "./artifacts"); // ./build.sh --target Build-Container -artifactDir="somedir"
@@ -10,8 +12,6 @@ var slnName = Argument ("slnName", "dotnet_googletrendtopics");
 string versionInfo = null;
 
 Information (Figlet ("dotnet-google-trend-topics"));
-
-
 Task ("Clean")
 	.Does (() => {
 
@@ -63,16 +63,40 @@ Task ("Build")
 		var solution = GetFiles ("./*.sln").ElementAt (0);
 		Information ("Build solution: {0}", solution);
 		var settings = new DotNetCoreBuildSettings {
-			Configuration = "Release"
+			Configuration = configuration
 		};
 		DotNetCoreBuild (solution.FullPath, settings);
 	});
+Task("Run-Tests")
+    .Does(() =>
+{
+    var settings = new DotNetCoreTestSettings
+    {
+        Configuration = configuration,
+        NoBuild=true
+    }; 
+    
+    var coverletSettings = new CoverletSettings();
+    coverletSettings.CollectCoverage =true;
+    coverletSettings.CoverletOutputFormat= CoverletOutputFormat.opencover;
+    coverletSettings.CoverletOutputDirectory = "./coverlet";
+    var files = GetFiles("./test/**/*.csproj");
+    Information($"Found {files.Count} test project! ");
+
+    var reportFileName = string.Empty;
+    foreach(var file in files){
+        reportFileName= $"results-{file.GetFilenameWithoutExtension()}.xml";
+        Information($"Generate report file {reportFileName}");
+        coverletSettings.CoverletOutputName = reportFileName;
+        DotNetCoreTest(file.FullPath,settings,coverletSettings);
+    }
+});
 
 Task ("Pack")
 	.Does (() => {
 		var projectPath = "./src/googletrendstopics-tool/googletrendstopics-tool.csproj";
 		var settings = new DotNetCorePackSettings {
-			Configuration = "Release",
+			Configuration = configuration,
 			OutputDirectory = artifactDir,
 			NoBuild =true,
 			ArgumentCustomization = args => {				
