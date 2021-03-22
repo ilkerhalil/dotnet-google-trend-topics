@@ -75,8 +75,7 @@ Task ("Pack")
 			Configuration = "Release",
 			OutputDirectory = artifactDir,
 			NoBuild =true,
-			ArgumentCustomization = args => {
-				
+			ArgumentCustomization = args => {				
 				
 				return args;
 			}
