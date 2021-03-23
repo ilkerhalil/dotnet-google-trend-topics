@@ -13,13 +13,12 @@ steps:
     dotnet tool restore
   displayName: 'Restoring "Cake.Tool" .NET Core local tool'
 
-- bash: dotnet cake --target="Build" --verbosity="verbose"
+- bash: |
+    export PATH="$PATH:$HOME/.dotnet/tools"
+    export PATH="$HOME/.dotnet:$PATH"
+
+- script: dotnet cake --target="Build" --verbosity="verbose"
+- script: dotnet cake --target="Pack"  --verbosity="verbose"
+- script: dotnet cake --target="Push"  --verbosity="verbose"
   env:
-    PATH: "$PATH:$HOME/.dotnet/tools"
-- bash: dotnet cake --target="Pack"  --verbosity="verbose"
-  env:
-    PATH: "$PATH:$HOME/.dotnet/tools"
-- bash: dotnet cake --target="Push"  --verbosity="verbose"
-  env:
-    PATH: "$PATH:$HOME/.dotnet/tools"
     nugetKey: $(nugetKey)
