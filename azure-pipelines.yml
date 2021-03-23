@@ -17,8 +17,8 @@ steps:
     export PATH="$PATH:$HOME/.dotnet/tools"
     export PATH="$HOME/.dotnet:$PATH"
 
-- script: dotnet cake --target="Build" --verbosity="verbose"
-- script: dotnet cake --target="Pack"  --verbosity="verbose"
-- script: dotnet cake --target="Push"  --verbosity="verbose"
+- bash: dotnet cake --target="Build" --verbosity="verbose"
+- bash: dotnet cake --target="Pack"  --verbosity="verbose"
+- bash: dotnet cake --target="Push"  --verbosity="verbose"
   env:
     nugetKey: $(nugetKey)
