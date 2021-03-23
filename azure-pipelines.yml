@@ -1,18 +1,24 @@
 pool:
-  vmImage: 'ubuntu-16.04'
-
-container:
-  image: iturer/docker-dotnetcore-cake-build
+  vmImage: 'Ubuntu-18.04'
 
 steps:
-- script: ./build.sh --script="build.cake" --target="Build" --verbosity="verbose"
-- script: ./build.sh --script="build.cake" --target="Pack"  --verbosity="verbose"
-- script: ./build.sh --script="build.cake" --target="Push"  --verbosity="verbose"
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK 3.1.202'
+  inputs:
+    packageType: sdk
+    version: 3.1.202
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- bash: |
+    dotnet tool restore
+  displayName: 'Restoring "Cake.Tool" .NET Core local tool'
+
+- bash: |
+    export PATH="$PATH:$HOME/.dotnet/tools"
+    export PATH="$HOME/.dotnet:$PATH"
+
+- script: dotnet cake --target="Build" --verbosity="verbose"
+- script: dotnet cake --target="Pack"  --verbosity="verbose"
+- script: dotnet cake --target="Push"  --verbosity="verbose"
   env:
     nugetKey: $(nugetKey)
-
-
-
-
-
-
