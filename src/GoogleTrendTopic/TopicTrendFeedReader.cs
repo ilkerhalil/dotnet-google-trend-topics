@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using googletrendstopics_tool;
 using McMaster.Extensions.CommandLineUtils;
 using System.Collections.Generic;
 using ConsoleTables;
@@ -16,20 +15,21 @@ namespace GoogleTrendsTopicsTool
         public TopicTrendFeedReader(IXmlReader xmlReader)
         {
             _xmlReader = xmlReader;
-            Url = $"{baseUrl}/rss?geo={Geo.ToString()}";
+            
         }
 
         [Option(ShortName = "g", Description = "Trends geo,Default value US")]
-        public string Geo { get; } = "US";
+        public string Geo { get;private set; } = "US";
 
-        [Option(ShortName = "u", Description = "The Url")]
-        public string Url { get; }
+        [Option(ShortName = "u", Description = "The Base Url")]
+        public string BaseUrl { get;} = baseUrl;
 
         /// <inheritdoc />
         public async Task<int> OnExecute(CommandLineApplication app, IConsole console)
         {
-            console.WriteLine($"{Url} for Google Topic Trends");
-            var stream = await _xmlReader.GetStreamAsync(new Uri(Url));
+            var url = $"{baseUrl}/rss?geo={Geo.ToString()}";
+            console.WriteLine($"{url} for Google Topic Trends");
+            var stream = await _xmlReader.GetStreamAsync(new Uri(url));
             List<FeedResult> result = await _xmlReader.ReaderAsync(stream) as List<FeedResult>;
             ConsoleTable
                 .From<FeedResult>(result)

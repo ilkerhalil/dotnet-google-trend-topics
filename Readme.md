@@ -4,12 +4,12 @@
 dotnet tool install -g Google.TrendTopic.Dotnet.Cli --add-source https://www.myget.org/F/ilkerhalil/api/v3/index.json
 ```
 ```
-Usage: googletrendstopics-tool [options]
+Usage: google-trend [options]
 Options:
 -g|--geo <GEO> Trends geo,Default value US
 -?|-h|--help Show help information
 
-googletrendstopics-tool --geo=TR
+google-trend --geo=TR
 ```
 Build status
     
