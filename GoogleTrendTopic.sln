@@ -14,11 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "googletrendstopics-tool", "src\googletrendstopics-tool\googletrendstopics-tool.csproj", "{A1BA2CE8-1803-4EEF-8B6F-3DC3C86B734E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTrendTopic", "src\GoogleTrendTopic\GoogleTrendTopic.csproj", "{A1BA2CE8-1803-4EEF-8B6F-3DC3C86B734E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FB9DE861-975B-4FFB-9174-8E698E55DFCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "googletrendstopics-tool-tests", "test\googletrendstopics-tool-tests\googletrendstopics-tool-tests.csproj", "{F1BB164E-07F3-41CF-83FA-09B1160E3C60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTrendTopic.UnitTest", "test\GoogleTrendTopic.UnitTest\GoogleTrendTopic.UnitTest.csproj", "{F1BB164E-07F3-41CF-83FA-09B1160E3C60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

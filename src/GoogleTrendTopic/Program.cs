@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using GoogleTrendsTopicsTool;
 using McMaster.Extensions.CommandLineUtils;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace googletrendstopics_tool
+namespace GoogleTrendsTopicsTool
 {
     [ExcludeFromCodeCoverage]
     class Program {

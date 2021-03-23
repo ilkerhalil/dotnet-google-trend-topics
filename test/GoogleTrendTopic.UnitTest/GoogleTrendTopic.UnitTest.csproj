@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>googletrendstopics_tool_tests</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
@@ -17,7 +16,7 @@
     <PackageReference Include="AutoBogus" Version="2.13.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\googletrendstopics-tool\googletrendstopics-tool.csproj" />
+    <ProjectReference Include="..\..\src\GoogleTrendTopic\GoogleTrendTopic.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="sample.rss" Exclude="bin\**\*;obj\**\*" CopyToOutputDirectory="PreserveNewest" />
