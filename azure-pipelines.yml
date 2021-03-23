@@ -9,7 +9,7 @@ steps:
     version: 3.1.407
 
 - bash: |
-    dotnet tool restore
+    dotnet tool install --global Cake.Tool --version 1.1.0
   displayName: 'Restoring "Cake.Tool" .NET Core local tool'
 
 - bash: |
