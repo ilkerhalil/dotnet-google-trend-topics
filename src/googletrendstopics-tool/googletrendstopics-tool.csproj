@@ -10,11 +10,11 @@
     <MinVerMinimumMajorMinor>1.2</MinVerMinimumMajorMinor>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ConsoleTableExt" Version="3.1.5"/>
     <PackageReference Include="MinVer" Version="2.5.0" PrivateAssets="all"/>
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="3.1.0"/>
     <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2"/>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1"/>
+    <PackageReference Include="ConsoleTables" Version="2.4.2" />
   </ItemGroup>
   <PropertyGroup>
     <LangVersion>7.1</LangVersion>

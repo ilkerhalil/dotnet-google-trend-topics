@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml;
@@ -27,11 +28,21 @@ namespace GoogleTrendsTopicsTool
                 var reader = new RssFeedReader(xmlReader);
                 while (await reader.Read())
                 {
+                    var feedResult = new FeedResult();
                     switch (reader.ElementType)
                     {
                         case SyndicationElementType.Item:
                             var item = await reader.ReadItem();
-                            feedResults.Add(new FeedResult() { Trend = item.Title, Description = item.Description });
+                            if (string.IsNullOrWhiteSpace(item.Title))
+                            {
+                                continue;
+                            }
+                            if (item.Links.Any())
+                            {
+                                feedResult.Link = item.Links.First().Uri.OriginalString;
+                            }
+                            feedResult.Trend = item.Title;
+                            feedResults.Add(feedResult);
                             break;
                         case SyndicationElementType.None:
                             break;
@@ -44,8 +55,9 @@ namespace GoogleTrendsTopicsTool
                         case SyndicationElementType.Category:
                             break;
                         case SyndicationElementType.Image:
-                            break;                            
+                            break;
                     }
+                    
                 }
                 return await Task.FromResult(feedResults);
             }
