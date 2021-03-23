@@ -5,15 +5,16 @@
     <IsPackable>true</IsPackable>
     <PackAsTool>true</PackAsTool>
     <PackageId>Google.TrendTopic.Dotnet.Cli</PackageId>
+    <AssemblyName>google-trend</AssemblyName>
     <LangVersion>latest</LangVersion>
     <Version>$(Version)</Version>
     <MinVerMinimumMajorMinor>1.2</MinVerMinimumMajorMinor>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MinVer" Version="2.5.0" PrivateAssets="all"/>
-    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="3.1.0"/>
-    <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2"/>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1"/>
+    <PackageReference Include="MinVer" Version="2.5.0" PrivateAssets="all" />
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="3.1.0" />
+    <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="ConsoleTables" Version="2.4.2" />
   </ItemGroup>
 </Project>

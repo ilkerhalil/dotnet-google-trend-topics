@@ -7,10 +7,10 @@ var solutionDir = System.IO.Directory.GetCurrentDirectory ();
 var testResultDir = Argument ("testResultDir", System.IO.Path.Combine (solutionDir, "test-results")); // ./build.sh --target Build-Container -testResultsDir="somedir"
 var artifactDir = Argument ("artifactDir", "./artifacts"); // ./build.sh --target Build-Container -artifactDir="somedir"
 var buildNumber = Argument<int> ("buildNumber", 0); // ./build.sh --target Build-Container -buildNumber=5
-var slnName = Argument ("slnName", "dotnet_googletrendtopics");
+var slnName = Argument ("slnName", "GoogleTrendTopic");
 string versionInfo = null;
 
-Information (Figlet ("dotnet-google-trend-topics"));
+Information (Figlet ("GoogleTrendTopic"));
 Task ("Clean")
 	.Does (() => {
 
@@ -51,7 +51,7 @@ Task ("PrepareDirectories")
 
 Task ("Restore")
 	.Does (() => {
-		DotNetCoreRestore ("./dotnet-google-trend-topics.sln");
+		DotNetCoreRestore ("./GoogleTrendTopic.sln");
 	});
 Task ("Build")
 	.IsDependentOn ("Clean")
@@ -93,7 +93,7 @@ Task("Run-Tests")
 
 Task ("Pack")
 	.Does (() => {
-		var projectPath = "./src/googletrendstopics-tool/googletrendstopics-tool.csproj";
+		var projectPath = "./src/GoogleTrendTopic/GoogleTrendTopic.csproj";
 		var settings = new DotNetCorePackSettings {
 			Configuration = configuration,
 			OutputDirectory = artifactDir,
@@ -137,7 +137,7 @@ FilePath GetSlnFile () {
 
 FilePath GetMainProjectFile () {
 	foreach (var project in GetSrcProjectFiles ()) {
-		if (project.FullPath.EndsWith ($"googletrendstopics-tool")) {
+		if (project.FullPath.EndsWith ($"GoogleTrendTopic")) {
 			return project;
 		}
 	}
