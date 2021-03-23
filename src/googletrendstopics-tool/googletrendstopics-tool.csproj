@@ -16,7 +16,4 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1"/>
     <PackageReference Include="ConsoleTables" Version="2.4.2" />
   </ItemGroup>
-  <PropertyGroup>
-    <LangVersion>7.1</LangVersion>
-  </PropertyGroup>
 </Project>

@@ -15,13 +15,12 @@ namespace GoogleTrendsTopicsTool
 
         public TopicTrendFeedReader(IXmlReader xmlReader)
         {
-            Geo = "US";
             _xmlReader = xmlReader;
             Url = $"{baseUrl}/rss?geo={Geo.ToString()}";
         }
 
         [Option(ShortName = "g", Description = "Trends geo,Default value US")]
-        public string Geo { get; }
+        public string Geo { get; } = "US";
 
         [Option(ShortName = "u", Description = "The Url")]
         public string Url { get; }
