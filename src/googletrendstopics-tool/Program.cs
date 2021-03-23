@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using GoogleTrendsTopicsTool;
 using McMaster.Extensions.CommandLineUtils;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace googletrendstopics_tool
 {
@@ -14,7 +15,14 @@ namespace googletrendstopics_tool
         {
             try
             {
-                return CommandLineApplication.Execute<TopicTrendFeedReader>(args);
+                var serviceCollection = new ServiceCollection();
+                serviceCollection.AddTransient<IXmlReader,TrendTopicXmlReader>();
+                var serviceProvider = serviceCollection.BuildServiceProvider();
+                var commandLineApplication = new CommandLineApplication<TopicTrendFeedReader>();
+                commandLineApplication.Conventions
+                .UseDefaultConventions()
+                .UseConstructorInjection(serviceProvider);
+                return commandLineApplication.Execute(args);
             }
             catch (System.Exception ex)
             {

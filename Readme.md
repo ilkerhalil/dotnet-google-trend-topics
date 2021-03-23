@@ -1,24 +1,24 @@
-Install
+## Install
 
-    dotnet tool install -g Google.TrendTopic.Dotnet.Cli --add-source https://www.myget.org/F/ilkerhalil/api/v3/index.json
-
+```
+dotnet tool install -g Google.TrendTopic.Dotnet.Cli --add-source https://www.myget.org/F/ilkerhalil/api/v3/index.json
+```
+```
 Usage: googletrendstopics-tool [options]
 Options:
 -g|--geo <GEO> Trends geo,Default value US
 -?|-h|--help Show help information
 
-    googletrendstopics-tool --geo=TR
-
+googletrendstopics-tool --geo=TR
+```
 Build status
     
 [![Build Status](https://dev.azure.com/ilkerhalil/dotnet-google-trend-topics/_apis/build/status/ilkerhalil.dotnet-google-trend-topics?branchName=development)](https://dev.azure.com/ilkerhalil/dotnet-google-trend-topics/_build/latest?definitionId=5&branchName=development)
 
 
-| Package | NuGet Stable | 
+| Package | MyGet Stable | 
 | ------- | ------------ | 
-| [Google.TrendTopic.Dotnet.Cli](https://www.myget.org/feed/ilkerhalil/package/nuget/Google.TrendTopic.Dotnet.Cli) | [![MyGet Badge](https://www.myget.org/feed/ilkerhalil/package/nuget/Google.TrendTopic.Dotnet.Cli)](https://www.myget.org/feed/ilkerhalil/package/nuget/Google.TrendTopic.Dotnet.Cli)
-
-
+| [Google.TrendTopic.Dotnet.Cli](https://www.myget.org/feed/ilkerhalil/package/nuget/Google.TrendTopic.Dotnet.Cli) | [![MyGet Badge](https://shields.io/myget/ilkerhalil/v/Google.TrendTopic.Dotnet.Cli)](https://www.myget.org/feed/ilkerhalil/package/nuget/Google.TrendTopic.Dotnet.Cli)
 
 ## How to build
 

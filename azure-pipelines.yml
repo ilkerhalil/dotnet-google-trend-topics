@@ -30,6 +30,4 @@ steps:
   env:
     nugetKey: $(nugetKey)
   condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/development'),eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  displayName: "Push Nuget Pack"
-
-  
+  displayName: "Push Nuget Pack"  
