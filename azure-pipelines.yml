@@ -6,8 +6,7 @@ steps:
   displayName: 'Install .NET Core SDK 3.1.202'
   inputs:
     packageType: sdk
-    version: 3.1.202
-    installationPath: $(Agent.ToolsDirectory)/dotnet
+    version: 3.1.407
 
 - bash: |
     dotnet tool restore
@@ -16,6 +15,7 @@ steps:
 - bash: |
     export PATH="$PATH:$HOME/.dotnet/tools"
     export PATH="$HOME/.dotnet:$PATH"
+  displayName: 'Export dotnet core path'
 
 - script: dotnet cake --target="Build" --verbosity="verbose"
 - script: dotnet cake --target="Pack"  --verbosity="verbose"
