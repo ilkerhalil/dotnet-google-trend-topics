@@ -1,18 +1,35 @@
 pool:
-  vmImage: 'ubuntu-16.04'
-
-container:
-  image: iturer/docker-dotnetcore-cake-build
+  vmImage: 'Ubuntu-18.04'
 
 steps:
-- script: ./build.sh --script="build.cake" --target="Build" --verbosity="verbose"
-- script: ./build.sh --script="build.cake" --target="Pack"  --verbosity="verbose"
-- script: ./build.sh --script="build.cake" --target="Push"  --verbosity="verbose"
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK 3.1.202'
+  inputs:
+    packageType: sdk
+    version: 3.1.407
+
+- bash: |
+    dotnet tool install --global Cake.Tool --version 1.1.0
+  displayName: 'Install "Cake.Tool"'
+
+- bash: |
+    export PATH="$PATH:$HOME/.dotnet/tools"
+    export PATH="$HOME/.dotnet:$PATH"
+  displayName: 'Export dotnet core path'
+
+- script: dotnet cake --target="Build" --verbosity="verbose"
+  displayName: "Build Project"
+
+- script: dotnet cake --target="Run-Tests" --verbosity="verbose"
+  displayName: "Run tests"
+
+- script: dotnet cake --target="Pack"  --verbosity="verbose"
+  condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/development'),eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  displayName: "Create Nuget Pack"
+- script: dotnet cake --target="Push"  --verbosity="verbose"
   env:
     nugetKey: $(nugetKey)
+  condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/development'),eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  displayName: "Push Nuget Pack"
 
-
-
-
-
-
+  
