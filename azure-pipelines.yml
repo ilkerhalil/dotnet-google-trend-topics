@@ -18,7 +18,13 @@ steps:
   displayName: 'Export dotnet core path'
 
 - script: dotnet cake --target="Build" --verbosity="verbose"
+
+- script: dotnet cake --target="Run-Tests" --verbosity="verbose"
+
 - script: dotnet cake --target="Pack"  --verbosity="verbose"
+  condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/development'),eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 - script: dotnet cake --target="Push"  --verbosity="verbose"
   env:
     nugetKey: $(nugetKey)
+  condition: or(eq(variables['Build.SourceBranch'], 'refs/heads/development'),eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  

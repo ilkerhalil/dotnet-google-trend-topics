@@ -1,9 +1,6 @@
 #module nuget:?package=Cake.DotNetTool.Module&version=1.1.0
 #addin nuget:?package=Cake.Figlet&version=2.0.1
 #addin "nuget:?package=Cake.Coverlet&version=2.5.4"
-
-
-
 var target = Argument ("target", "Default");
 var configuration = Argument ("configuration", "Release");
 var solutionDir = System.IO.Directory.GetCurrentDirectory ();
