@@ -3,8 +3,7 @@ using System.Threading.Tasks;
 using googletrendstopics_tool;
 using McMaster.Extensions.CommandLineUtils;
 using System.Collections.Generic;
-using ConsoleTableExt;
-using System.Xml.Linq;
+using ConsoleTables;
 
 namespace GoogleTrendsTopicsTool
 {
@@ -33,9 +32,10 @@ namespace GoogleTrendsTopicsTool
             console.WriteLine($"{Url} for Google Topic Trends");
             var stream = await _xmlReader.GetStreamAsync(new Uri(Url));
             List<FeedResult> result = await _xmlReader.ReaderAsync(stream) as List<FeedResult>;
-            ConsoleTableBuilder.From(result)
-                               .WithFormat(ConsoleTableBuilderFormat.Alternative)
-                               .ExportAndWriteLine();
+            ConsoleTable
+                .From<FeedResult>(result)
+                .Configure(o => o.NumberAlignment = Alignment.Left)
+                .Write(Format.Alternative);
             return await Task.FromResult(Program.OK);
         }
     }
